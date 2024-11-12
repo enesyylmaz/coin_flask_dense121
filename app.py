@@ -8,7 +8,7 @@ from PIL import Image
 from flask import Flask, jsonify, request
 
 
-app = Flask(_name_)
+app = Flask(__name__)
 model = models.densenet121(weights="DenseNet121_Weights.DEFAULT")
 savefile = torch.load("dense121_aug.pth", weights_only=True)
 model.load_state_dict(savefile['model_state_dict'])
@@ -65,5 +65,5 @@ def predict():
             return jsonify({'class_id': class_id, 'class_name': class_name})
 
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run()
